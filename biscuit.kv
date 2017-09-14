@@ -1,0 +1,38 @@
+#:kivy 1.5.0
+
+<Tile>:
+    size_hint: (None, None)
+    anchor_x: 'center'
+    anchor_y: 'center'
+    pos: self.pos
+
+    canvas:
+        Color:
+            rgba: tuple(self.fillColor)
+        Mesh:
+            vertices: self.vertices
+            indices: [0, 1, 2, 3, 4, 5]
+            mode: 'triangle_fan'
+
+
+<Letter>:
+    size_hint: None, None
+    id: letter
+
+    borders: 2, 'solid', (1, 1, 1, 1.)
+    pos: (self.x, self.y)
+
+    canvas:
+        Color:
+            rgba: 1, 1, 1, 1.
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    Label:
+        id: letter_label
+        pos: self.parent.pos
+        size: self.parent.size
+        text: "@"
+        color: 1, 0, 0, 1
+        on_touch_down: letter.parent.letter_clicked(letter_label)
