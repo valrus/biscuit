@@ -33,18 +33,26 @@ def hex_to_pos(hex_x, hex_y):
     return SCALE * (hex_x * 2.0 + (hex_y % 2)) * SIN60, SCALE * 1.5 * hex_y
 
 
-class Letter(Button):
-    text = StringProperty("@")
+class Letter(Widget):
+    text = StringProperty("")
+
+    def __init__(self, letter, **kw):
+        super(Letter, self).__init__(**kw)
+        self.text = letter
 
     def on_parent(self, widget, parent):
         self.size = parent.size
+
+    def collide_point(self, *point):
+        super(Letter, self).collide_point(*point)
+        return True
 
 
 class Player(object):
     def __init__(self, hex_x, hex_y, **kw):
         super(Player, self).__init__()
         self.x, self.y = hex_x, hex_y
-        self.widget = Letter(pos=hex_to_pos(hex_x, hex_y))
+        self.widget = Letter("@", pos=hex_to_pos(hex_x, hex_y))
 
 
 class Tile(AnchorLayout):

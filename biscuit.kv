@@ -22,17 +22,11 @@
     borders: 2, 'solid', (1, 1, 1, 1.)
     pos: (self.x, self.y)
 
-    canvas:
-        Color:
-            rgba: 1, 1, 1, 1.
-        Rectangle:
-            pos: self.pos
-            size: self.size
+    on_touch_down: letter.parent.letter_clicked(letter_label)
 
     Label:
         id: letter_label
         pos: self.parent.pos
         size: self.parent.size
-        text: "@"
-        color: 1, 0, 0, 1
-        on_touch_down: letter.parent.letter_clicked(letter_label)
+        text: self.parent.text
+        color: 0, 0, 0, 1
